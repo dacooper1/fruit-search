@@ -1,39 +1,53 @@
 const input = document.querySelector('#fruit');
 const suggestions = document.querySelector('.suggestions ul');
+const body = document.querySelector('body')
 
 const fruit = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry', 'Boysenberry', 'Currant', 'Cherry', 'Coconut', 'Cranberry', 'Cucumber', 'Custard apple', 'Damson', 'Date', 'Dragonfruit', 'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Gooseberry', 'Grape', 'Raisin', 'Grapefruit', 'Guava', 'Honeyberry', 'Huckleberry', 'Jabuticaba', 'Jackfruit', 'Jambul', 'Juniper berry', 'Kiwifruit', 'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Longan', 'Lychee', 'Mango', 'Mangosteen', 'Marionberry', 'Melon', 'Cantaloupe', 'Honeydew', 'Watermelon', 'Miracle fruit', 'Mulberry', 'Nectarine', 'Nance', 'Olive', 'Orange', 'Clementine', 'Mandarine', 'Tangerine', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Plantain', 'Plum', 'Pineapple', 'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Salmonberry', 'Rambutan', 'Redcurrant', 'Salak', 'Satsuma', 'Soursop', 'Star fruit', 'Strawberry', 'Tamarillo', 'Tamarind', 'Yuzu'];
 
-let searching = function search(str) {
+input.addEventListener('keyup', searchHandler);
+suggestions.addEventListener('click', useSuggestion);
+body.addEventListener('click', clearSearch)
+
+// filters through fruit array for fruits that include the inputValue, returns array with filtered fruits
+function search(str) {
 	let results = [];
 
-	// TODO
-	for (let item of fruit){
-		let lowerItem = item.toLowerCase()
-		let lowerStr = str.toLowerCase()
-		if (lower.includes(str)) {
+	for (let item of fruit) {
+		if (item.toLowerCase().includes(str.toLowerCase())) {
 			results.push(item)
 		}
 	}
 	return results;
 }
 
-function searchHandler(search) {
-	searching()
-	for (let item of search) {
-		let newLi = document.createElement('li')
-		suggestions.append(newLi)
-		newLi.innerText = item
-	}
+function searchHandler(e) { 
+	// calls search on keyup events in the field using the value in the search bar 
+	let inputVal = e.target.value
+	let searching = search(inputVal)
+
+	// calls this function on keyup events in the input field
+	showSuggestions(searching, inputVal);
 }
 
 function showSuggestions(results, inputVal) {
-
-	// TODO highlights over the hovered fruit
+	// prevents previous suggestions from staying in list 
+	suggestions.innerHTML = '';
+	// creates new li with suggested items and appends then to the suggested list
+	if (inputVal !== '') {
+	for (let item of results) {
+		let newLi = document.createElement('li')
+		newLi.innerText = item
+		suggestions.appendChild(newLi)
+		} 
+	}	
 }
 
 function useSuggestion(e) {
-	// TODO adds selected fruit to search bar
+// Places selected fruit in the search bar
+input.value = e.target.innerText;
 }
 
-input.addEventListener('keyup', searchHandler);
-suggestions.addEventListener('click', useSuggestion);
+function clearSearch(e) {
+// Clears suggestions and search bar
+}
+
