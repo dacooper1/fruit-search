@@ -21,22 +21,28 @@ input {
  width: 400px;
  height: 30px;
  margin: 0px auto;
- top: 100px
+
+ 
 }
 
 .search-container input,
 .search-container .suggestions {
  width: 400px; 
  margin: 0px auto;
- background-color:rgb(236,230,228,0.4)
+ background-color:rgb(236,230,228,0.4);
+ position: absolute;
+ 
+ 
 }
 
 .search-container input {
   padding: 10px;
+  top: 250px;
 }
 
 .search-container .suggestions {
   margin: 0px auto;
+  top: 290px;
 }
 
 ul {
