@@ -10,6 +10,7 @@ input:focus {
 body {
 background: rgb(252,217,0);
 background: linear-gradient(90deg, rgba(252,217,0,1) 8%, rgba(252,175,0,1) 35%, rgba(255,74,0,1) 100%);
+position: relative;
 }
 
 input {
@@ -19,6 +20,8 @@ input {
 .search-container {
  width: 400px;
  height: 30px;
+ margin: 0px auto;
+ top: 100px
 }
 
 .search-container input,

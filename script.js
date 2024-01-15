@@ -47,7 +47,5 @@ function useSuggestion(e) {
 input.value = e.target.innerText;
 }
 
-function clearSearch(e) {
-// Clears suggestions and search bar
-}
+
 
