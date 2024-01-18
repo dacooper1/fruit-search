@@ -36,16 +36,22 @@ function showSuggestions(results, inputVal) {
 	for (let item of results) {
 		let newLi = document.createElement('li')
 		let matches = item.toLowerCase().match(inputVal.toLowerCase())
-		let frontEnd = (item.toLowerCase().indexOf(matches)-1)
-		let frontStart = 0
-		let backStart = (item.toLowerCase().indexOf(matches) + inputVal.length-1)
-		newLi.innerText = item
+		arrayOfItem = item.toLowerCase().split('')
+		let beginningOfFrontRange = 0
+		let endOfFrontRange = item.toLowerCase().indexOf(matches)
+		let beginnigOfBackRange = arrayOfItem.indexOf(matches) + (inputVal.length + 1)
+		let endOfBackRange = arrayOfItem.length
+		let front = arrayOfItem.splice(beginningOfFrontRange, endOfFrontRange).join('')
+		let back = arrayOfItem.splice(beginnigOfBackRange, endOfBackRange).join('')
+		newLi.innerHTML = `${front}<b>${matches}<b>${back}`
 		suggestions.appendChild(newLi)
-		
 		console.log(item)
 		console.log(matches)
-		console.log(frontEnd)
+		console.log(arrayOfItem)
+		console.log(beginningOfFrontRange)
+		console.log(endOfFrontRange)
 		} 
+		
 		// index of -1 until length
 	}	
 	
