@@ -55,10 +55,4 @@ ul.has-suggestions {
 }
 
 ul li {
-  list-style-type: none;
-  padding: 10px;
-}
-
-ul li:hover {
-  background-color:rgba(252,175,0,1)
-}
+  
