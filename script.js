@@ -41,20 +41,14 @@ function showSuggestions(results, inputVal) {
 		let endOfFrontRange = item.toLowerCase().indexOf(matches)
 		let beginnigOfBackRange = arrayOfItem.indexOf(matches) + (inputVal.length + 1)
 		let endOfBackRange = arrayOfItem.length
-		let front = arrayOfItem.splice(beginningOfFrontRange, endOfFrontRange).join('')
+		let front = arrayOfItem.splice(beginningOfFrontRange, endOfFrontRange).join('').charAt(0).toUpperCase()
 		let back = arrayOfItem.splice(beginnigOfBackRange, endOfBackRange).join('')
 		newLi.innerHTML = `${front}<b>${matches}<b>${back}`
 		suggestions.appendChild(newLi)
 		console.log(item)
-		console.log(matches)
-		console.log(arrayOfItem)
-		console.log(beginningOfFrontRange)
-		console.log(endOfFrontRange)
+		console.log(front)
 		} 
-		
-		// index of -1 until length
 	}	
-	
 }
 
 function useSuggestion(e) {
@@ -64,7 +58,7 @@ input.value = e.target.innerText;
 
 input.addEventListener('keyup', searchHandler);
 suggestions.addEventListener('click', useSuggestion);
-body.addEventListener('click', clearSearch)
+
 
 
 
