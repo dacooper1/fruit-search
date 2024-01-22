@@ -28,27 +28,31 @@ function searchHandler(e) {
 }
 
 function showSuggestions(results, inputVal) {
-	// prevents previous suggestions from staying in list 
-	suggestions.innerHTML = '';
-	// creates new li with suggested items and appends then to the suggested list
-	if (inputVal !== '') {
-		
-	for (let item of results) {
-		let newLi = document.createElement('li')
-		let matches = item.toLowerCase().match(inputVal.toLowerCase())
-		arrayOfItem = item.toLowerCase().split('')
-		let beginningOfFrontRange = 0
-		let endOfFrontRange = item.toLowerCase().indexOf(matches)
-		let beginnigOfBackRange = arrayOfItem.indexOf(matches) + (inputVal.length + 1)
-		let endOfBackRange = arrayOfItem.length
-		let front = arrayOfItem.splice(beginningOfFrontRange, endOfFrontRange).join('').charAt(0).toUpperCase()
-		let back = arrayOfItem.splice(beginnigOfBackRange, endOfBackRange).join('')
-		newLi.innerHTML = `${front}<b>${matches}<b>${back}`
-		suggestions.appendChild(newLi)
-		console.log(item)
-		console.log(front)
-		} 
-	}	
+    // prevents previous suggestions from staying in list 
+     suggestions.innerHTML = '';
+    // creates new li with suggested items and appends then to the suggested list
+    if (inputVal !== '') {
+        for (let item of results) {
+            item = item.toLowerCase()
+            let newLi = document.createElement('li')
+            let search_value = inputVal.toLowerCase()
+            let beginningOfFrontRange = 0
+            let endOfFrontRange = item.indexOf(search_value)
+            let beginnigOfBackRange = endOfFrontRange + search_value.length
+            let endOfBackRange = item.length
+
+            let front = (item.slice(beginningOfFrontRange, endOfFrontRange))
+            let back = item.slice(beginnigOfBackRange, endOfBackRange)
+
+            newLi.innerHTML = `${front && capitalizeFirstLetter(front)}<b>${front ? search_value : capitalizeFirstLetter(search_value)}</b>${back}`
+            suggestions.appendChild(newLi)
+            console.log(newLi.innerHTML)
+        }
+    }
+}
+
+function capitalizeFirstLetter(str) {
+    return str[0].toUpperCase() + str.slice(1);
 }
 
 function useSuggestion(e) {
@@ -58,6 +62,30 @@ input.value = e.target.innerText;
 
 input.addEventListener('keyup', searchHandler);
 suggestions.addEventListener('click', useSuggestion);
+
+// function showSuggestions(results, query) {
+// 	suggestions.innerHTML = "";
+  
+// 	if (results.length > 0) {
+// 	  for (i = 0; i < results.length; i++) {
+// 		let item = results[i];
+  
+// 		// Highlight first string match (Optional).
+// 		// The "i" flag modifier is used to perform case-insensitive matching in the string.
+// 		const match = item.match(new RegExp(query, "i"));
+// 		item = item.replace(match[0], `<b>${match[0]}</b>`);
+  
+// 		suggestions.innerHTML += `<li>${item}</li>`;
+// 	  }
+// 	  input.classList.add("hasSuggestions");
+// 	  suggestions.classList.add("hasSuggestions");
+// 	} else {
+// 	  results = [];
+// 	  suggestions.innerHTML = "";
+// 	  suggestions.classList.remove("hasSuggestions");
+// 	  input.classList.remove("hasSuggestions");
+// 	}
+//   }
 
 
 
